@@ -47,6 +47,46 @@ public final class API {
     }
 
     /**
+     * Load a list of Post objects from a file
+     * @param file
+     * @return
+     */
+    public List<Post> loadPosts(final File file) throws IOException {
+        final List<Post> posts = new ArrayList<>();
+
+        final String json = new String(Files.readAllBytes(file.toPath()));
+        final JSONObject obj = Utils.strToObj(json);
+        final JSONArray array = obj.getJSONArray("posts");
+
+        for (final Object object : array) {
+            final JSONObject postObj = (JSONObject) object;
+            final Post post = loadPost(postObj);
+
+            posts.add(post);
+        }
+
+        return posts;
+    }
+
+    /**
+     * Load a post from a json string
+     * @param json
+     * @return
+     */
+    public Post loadPost(final String json) {
+        return loadPost(Utils.strToObj(json));
+    }
+
+    /**
+     * Load a post from a JSONObject
+     * @param obj
+     * @return
+     */
+    public Post loadPost(final JSONObject obj) {
+        return new Post(obj);
+    }
+
+    /**
      * Get Reddit Access Token from the API
      * Be cautious about calling this as it is rate limited
      * @param details
