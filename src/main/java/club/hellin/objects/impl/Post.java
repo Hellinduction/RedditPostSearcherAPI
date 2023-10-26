@@ -74,7 +74,41 @@ public final class Post implements RedditObject {
     @Override
     public JSONObject toJson() {
         final JSONObject obj = Utils.clone(this.originalJson);
+        this.set(obj);
         return obj;
+    }
+
+    /**
+     * HOW DID I FORGET TO DO THIS???
+     * Anyway this makes sure changes you make to this object actually get saved
+     */
+    private void set(JSONObject obj) {
+        obj.put("subreddit", this.subreddit);
+        obj.put("selftext", this.selftext);
+        obj.put("author_full_name", this.authorFullName);
+        obj.put("saved", this.saved);
+        obj.put("mod_reason_title", this.modReasonTitle);
+        obj.put("gilded", this.gilded);
+        obj.put("clicked", this.clicked);
+        obj.put("title", this.title);
+        obj.put("subreddit_name_prefixed", this.subredditNamePrefixed);
+        obj.put("hidden", this.hidden);
+        obj.put("pwls", this.pwls);
+        obj.put("downs", this.downs);
+        obj.put("name", this.name);
+        obj.put("quarantine", this.quarantine);
+        obj.put("link_flair_text_color", this.linkFlairTextColor);
+        obj.put("upvote_ratio", this.upvoteRatio);
+        obj.put("author_flair_background_color", this.authorFlairBackgroundColor);
+        obj.put("subreddit_type", this.subredditType);
+        obj.put("ups", this.ups);
+        obj.put("total_rewards_received", this.totalRewardsReceived);
+        obj.put("is_original_content", this.isOriginalContent);
+        obj.put("score", this.score);
+        obj.put("edited", this.edited);
+        obj.put("selftext_html", this.selftextHtml);
+        obj.put("id", this.id);
+        obj.put("permalink", this.permalink);
     }
 
     /**
